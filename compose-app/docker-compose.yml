@@ -1,0 +1,40 @@
+services:
+  db:
+    # ver指定
+    image: postgres:15-alpine
+
+    # 環境変数設定
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+
+    # データ保存先と初回読み込みスクリプト
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+
+    # 通信設定
+    ports:
+      # 接続元：接続先ポート
+      - "127.0.0.1:5432:5432"
+
+  web:
+    # imageではなく./webからbuild
+    build: ./web
+
+    # 
+    ports:
+      # user 80 : web_server 80
+      - "80:80"
+
+    # app.pyが読む環境設定
+    environment:
+      DB_HOST: db
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+      DB_NAME: mydatabase
+
+volumes:
+  db-data:
+
