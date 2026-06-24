@@ -91,3 +91,12 @@ docker compose restart web
 # 何か書き換えたとき
 docker compose up -d --build
 
+
+
+# -----------------------------
+
+
+
+
+
+
