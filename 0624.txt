@@ -104,6 +104,17 @@ sudo ./aws/install
 
 aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 861076396247.dkr.ecr.ap-northeast-1.amazonaws.com
 
+
+sudo docker build -t otani-ecr-01 .
+
 sudo docker tag otani-ecr-01:latest 861076396247.dkr.ecr.ap-northeast-1.amazonaws.com/otani-ecr-01:latest
 sudo docker push 861076396247.dkr.ecr.ap-northeast-1.amazonaws.com/otani-ecr-01:latest
 
+
+
+Webイメージのビルド
+sudo docker build -t otani-ecr-02 ./web
+# タグ付け
+sudo docker tag otani-ecr-02:latest 861076396247.dkr.ecr.ap-northeast-1.amazonaws.com/otani-ecr-02:latest
+# プッシュ
+sudo docker push 861076396247.dkr.ecr.ap-northeast-1.amazonaws.com/otani-ecr-02:latest
